@@ -193,6 +193,14 @@ public class LoginForm extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Login Success!");
                     this.dispose();
                     
+                    Dashboard dashboard = new Dashboard();
+
+            // Set the text of the displayname JLabel
+                    dashboard.setDisplayNameText(rs.getString(1));
+            
+            // Show the dashboard
+                    dashboard.setVisible(true);
+                    
             }
             else{
                     JOptionPane.showMessageDialog(null, "Incorrect Email Or Password", "Login Failed", 2);
