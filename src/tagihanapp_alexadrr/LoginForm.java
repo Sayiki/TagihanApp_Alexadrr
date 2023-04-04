@@ -191,8 +191,8 @@ public class LoginForm extends javax.swing.JFrame {
             if(rs.next())
             {
                     JOptionPane.showMessageDialog(null, "Login Success!");
-                    
                     this.dispose();
+                    
             }
             else{
                     JOptionPane.showMessageDialog(null, "Incorrect Email Or Password", "Login Failed", 2);
