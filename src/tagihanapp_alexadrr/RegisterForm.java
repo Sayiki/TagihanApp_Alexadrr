@@ -61,7 +61,7 @@ public class RegisterForm extends javax.swing.JFrame {
         jMale = new javax.swing.JRadioButton();
         jFemale = new javax.swing.JRadioButton();
         jLabel11 = new javax.swing.JLabel();
-        iDateChooser_BDATE = new com.toedter.calendar.JDateChooser();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -218,7 +218,7 @@ public class RegisterForm extends javax.swing.JFrame {
                                         .addComponent(jMale)
                                         .addGap(44, 44, 44)
                                         .addComponent(jFemale))
-                                    .addComponent(iDateChooser_BDATE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addGap(22, 22, 22))
         );
         layout.setVerticalGroup(
@@ -239,9 +239,9 @@ public class RegisterForm extends javax.swing.JFrame {
                     .addComponent(jMale)
                     .addComponent(jFemale))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
-                    .addComponent(iDateChooser_BDATE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -318,9 +318,9 @@ public class RegisterForm extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "Add A Password");
     } else if (!password.equals(confirmPassword)) {
         JOptionPane.showMessageDialog(null, "Retype The Password Again");
-    } else if (iDateChooser_BDATE.getDate() != null) {
+    } else if (jDateChooser1.getDate() != null) {
         SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
-        bdate = dateformat.format(iDateChooser_BDATE.getDate());
+        bdate = dateformat.format(jDateChooser1.getDate());
     }
             
     PreparedStatement ps;
@@ -407,7 +407,7 @@ public class RegisterForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup gGender;
-    private com.toedter.calendar.JDateChooser iDateChooser_BDATE;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JRadioButton jFemale;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
