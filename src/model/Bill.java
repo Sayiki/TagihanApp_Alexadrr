@@ -6,6 +6,7 @@
 package model;
 import java.util.Date;
 import java.util.ArrayList;
+import java.util.List;
 /**
  *
  * @author arzaq
@@ -26,10 +27,10 @@ public class Bill {
         this.category = category;
     }
 
-    public void addItem(Item item) {
-        items.add(item);
-        totalAmount += item.getPrice();
-    }
+    //public void addItem(Item item) {
+        //items.add(item);
+        //totalAmount += item.getPrice();
+    //}
 
     // getters and setters
 }
