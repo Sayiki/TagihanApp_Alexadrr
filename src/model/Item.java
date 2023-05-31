@@ -18,5 +18,7 @@ public class Item {
         this.price = price;
     }
 
-    // getters and setters
+    public double totalPrice(){
+        
+    }
 }
