@@ -19,6 +19,6 @@ public class Item {
     }
 
     public double totalPrice(){
-        
+        return 0;
     }
 }
