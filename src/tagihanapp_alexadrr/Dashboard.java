@@ -5,6 +5,11 @@
  */
 package tagihanapp_alexadrr;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 /**
  *
  * @author arzaq
@@ -16,7 +21,10 @@ public class Dashboard extends javax.swing.JFrame {
      */
     public Dashboard() {
         initComponents();
+        
+        
     }
+   
     
     // ...
 
@@ -54,6 +62,7 @@ public class Dashboard extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         Tagihan_label3 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -93,6 +102,11 @@ public class Dashboard extends javax.swing.JFrame {
         Tagihan_label1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         Tagihan_label2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        Tagihan_label2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Tagihan_label2MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -159,6 +173,8 @@ public class Dashboard extends javax.swing.JFrame {
                 .addContainerGap(49, Short.MAX_VALUE))
         );
 
+        jLabel11.setText("Create new bill here");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -209,6 +225,10 @@ public class Dashboard extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel11)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -237,7 +257,9 @@ public class Dashboard extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
+                .addGap(27, 27, 27)
+                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -261,14 +283,51 @@ public class Dashboard extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    
+    
+    
+    
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
         this.dispose();
-        
-        
+
+    // Retrieve the customer_id from the database
+    
         ListBill listBillForm = new ListBill();
         listBillForm.setLocationRelativeTo(null);
-        listBillForm.setVisible(true);
+    
+    // Retrieve bill_type and due_date from the database
+        try {
+            Connection con = MyConnection.getConnection();
+            String query = "SELECT bill_type, due_date FROM bill WHERE customer_id = ?";
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1, 1);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+
+            // Set the bill_type and due_date in the ListBill form
+                listBillForm.setDisplayBillText(rs.getString("bill_type"));
+                listBillForm.setDisplayDueDateText(rs.getString("due_date"));
+            }
+        }   
+        catch (SQLException ex) {
+        ex.printStackTrace();
+    }
+    
+    listBillForm.setVisible(true);
+        
     }//GEN-LAST:event_jLabel4MouseClicked
+
+    private void Tagihan_label2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tagihan_label2MouseClicked
+        Payment paym = new Payment();
+        paym.setLocationRelativeTo(null);
+        
+        paym.setVisible(true);
+        
+        
+        
+    }//GEN-LAST:event_Tagihan_label2MouseClicked
 
     /**
      * @param args the command line arguments
@@ -316,6 +375,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
