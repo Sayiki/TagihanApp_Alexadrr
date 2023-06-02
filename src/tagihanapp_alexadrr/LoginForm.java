@@ -194,6 +194,8 @@ public class LoginForm extends javax.swing.JFrame {
                     this.dispose();
                     
                     Dashboard dashboard = new Dashboard();
+                    
+                    dashboard.setLocationRelativeTo(null);
 
             // Set the text of the displayname JLabel
                     dashboard.setDisplayNameText(rs.getString(1));
