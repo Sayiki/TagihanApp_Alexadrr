@@ -142,7 +142,7 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("WiFi");
+        jButton2.setText("Internet");
         jButton2.setPreferredSize(new java.awt.Dimension(79, 23));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package tagihanapp_alexadrr;
+import com.toedter.calendar.JDateChooser;
 import javax.swing.JOptionPane;
 import java.text.SimpleDateFormat;
 import java.sql.PreparedStatement;
@@ -11,6 +12,12 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JPasswordField;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 
 
 
@@ -26,10 +33,55 @@ public class RegisterForm extends javax.swing.JFrame {
     /**
      * Creates new form RegisterForm
      */
+    AppController appController;
     public RegisterForm() {
         initComponents();
+        appController = new AppController(null, this);
+        
     }
 
+    public javax.swing.JButton getjRegister() {
+        return jRegister;
+    }
+    
+    public JTextField getjEmail() {
+        return jtEmail;
+    }
+
+    public JTextField getjName() {
+        return jtName;
+    }
+
+    public JTextField getjPhone() {
+        return jtPhone;
+    }
+
+    public JTextField getjAddress() {
+        return jtAddress;
+    }
+
+    public JPasswordField getjPassword() {
+        return jpPassword;
+    }
+
+    public JPasswordField getjConfirmPassword() {
+        return jpCPassword;
+    }
+
+    public JRadioButton getjMale() {
+        return jMale;
+    }
+
+    public JRadioButton getjFemale() {
+        return jFemale;
+    }
+
+    public JDateChooser getjDateChooser() {
+        return jDateChooser1;
+    }
+
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -291,59 +343,7 @@ public class RegisterForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jRegisterActionPerformed
 
     private void jRegisterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRegisterMouseClicked
-    String email = jtEmail.getText();
-    String name = jtName.getText();
-    String phone = jtPhone.getText();
-    String address = jtAddress.getText();
-    String password = String.valueOf(jpPassword.getPassword());
-    String confirmPassword = String.valueOf(jpCPassword.getPassword());
-    String bdate = null;
-    String gender;
-        
-    if (jMale.isSelected()) {
-        gender = "Male";
-    } else if (jFemale.isSelected()) {
-        gender = "Female";
-    } else {
-        gender = "Unknown";
-    }
-        
-    if (name.equals("")) {
-        JOptionPane.showMessageDialog(null, "Add A name");
-    } else if (password.equals("")) {
-        JOptionPane.showMessageDialog(null, "Add A Password");
-    } else if (!password.equals(confirmPassword)) {
-        JOptionPane.showMessageDialog(null, "Retype The Password Again");
-    } else if (jDateChooser1.getDate() != null) {
-        SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
-        bdate = dateformat.format(jDateChooser1.getDate());
-    }
-            
-    PreparedStatement ps;
-    String query = "INSERT INTO customer (Name, Email, Gender, DOB, Password, Phone, Alamat) " + "VALUES (?, ?, ?, ?, ?, ?, ?)";
-        
-    try {
-        ps = MyConnection.getConnection().prepareStatement(query);
-            
-        ps.setString(1, name);
-        ps.setString(2, email);
-        ps.setString(3, gender);
-        if (bdate != null) {
-            ps.setString(4, bdate);
-        } else {
-            ps.setNull(4, 0);
-        }
-        ps.setString(5, password);
-        ps.setString(6, phone);
-        ps.setString(7, address);
-
-            
-        if (ps.executeUpdate() > 0) {
-            JOptionPane.showMessageDialog(null, "New User Add");
-        }
-    } catch (SQLException ex) {
-        Logger.getLogger(RegisterForm.class.getName()).log(Level.SEVERE, null, ex);
-    }
+        appController.performRegister();
         
         
         
