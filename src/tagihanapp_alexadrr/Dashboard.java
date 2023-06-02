@@ -19,18 +19,23 @@ public class Dashboard extends javax.swing.JFrame {
     /**
      * Creates new form Dashboard
      */
+    AppController appController;
     public Dashboard() {
         initComponents();
+        
+        appController = new AppController(null, null);
         
         
     }
    
-    
-    // ...
 
     // Create a public method to set the text of the displayname JLabel
     public void setDisplayNameText(String text) {
         displayname.setText(text);
+    }
+    
+    public String getDisplayNameText() {
+        return displayname.getText();
     }
 
     /**
@@ -87,6 +92,11 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-headset-30.png"))); // NOI18N
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-user-30.png"))); // NOI18N
+        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel7MouseClicked(evt);
+            }
+        });
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/shockedcat (1).jpg"))); // NOI18N
 
@@ -290,36 +300,12 @@ public class Dashboard extends javax.swing.JFrame {
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
         this.dispose();
 
-    // Retrieve the customer_id from the database
-    
-        ListBill listBillForm = new ListBill();
-        listBillForm.setLocationRelativeTo(null);
-    
-    // Retrieve bill_type and due_date from the database
-        try {
-            Connection con = MyConnection.getConnection();
-            String query = "SELECT bill_type, due_date FROM bill WHERE customer_id = ?";
-            PreparedStatement ps = con.prepareStatement(query);
-            ps.setInt(1, 1);
-
-            ResultSet rs = ps.executeQuery();
-
-            if (rs.next()) {
-
-            // Set the bill_type and due_date in the ListBill form
-                listBillForm.setDisplayBillText(rs.getString("bill_type"));
-                listBillForm.setDisplayDueDateText(rs.getString("due_date"));
-            }
-        }   
-        catch (SQLException ex) {
-        ex.printStackTrace();
-    }
-    
-    listBillForm.setVisible(true);
+        appController.openListBillForm();
         
     }//GEN-LAST:event_jLabel4MouseClicked
 
     private void Tagihan_label2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tagihan_label2MouseClicked
+        this.dispose();
         Payment paym = new Payment();
         paym.setLocationRelativeTo(null);
         
@@ -328,6 +314,13 @@ public class Dashboard extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_Tagihan_label2MouseClicked
+
+    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
+        this.dispose();
+        String getname = getDisplayNameText();
+    
+        appController.openProfileForm(getname);
+    }//GEN-LAST:event_jLabel7MouseClicked
 
     /**
      * @param args the command line arguments

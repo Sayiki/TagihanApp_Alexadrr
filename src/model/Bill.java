@@ -5,32 +5,32 @@
  */
 package model;
 import java.util.Date;
-import java.util.ArrayList;
-import java.util.List;
+
 /**
  *
  * @author arzaq
  */
 public class Bill {
     private int id;
-    private User customer;
-    private Date date;
-    private List<Item> items;
-    private double totalAmount;
-    private Category category;
+    private int customer_id;
+    private String bill_type;
+    private int amount;
+    private Date due_date;
+    private boolean paid;
+    private Date payment_date;
 
-    public Bill(int id, User customer, Date date, Category category) {
+    public Bill(int id, int customer_id, String bill_type, int amount, Date due_date, boolean paid, Date payment_date) {
         this.id = id;
-        this.customer = customer;
-        this.date = date;
-        this.items = new ArrayList<>();
-        this.category = category;
+        this.customer_id = customer_id;
+        this.bill_type = bill_type;
+        this.amount = amount;
+        this.due_date = due_date;
+        this.paid = paid;
+        this.payment_date = payment_date;
     }
+    
 
-    //public void addItem(Item item) {
-        //items.add(item);
-        //totalAmount += item.getPrice();
-    //}
 
-    // getters and setters
+    
+
 }

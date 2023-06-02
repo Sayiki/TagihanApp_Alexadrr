@@ -7,6 +7,7 @@ package tagihanapp_alexadrr;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -25,13 +26,7 @@ public class AppController implements ActionListener {
         this.loginForm = loginForm;
         this.registerForm = registerForm;
 
-        if (loginForm != null) {
-            this.loginForm.getjLogin().addActionListener(this);
-        }
-
-        if (registerForm != null) {
-            this.registerForm.getjRegister().addActionListener(this);
-        }
+        
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -41,7 +36,6 @@ public class AppController implements ActionListener {
             performRegister();
         }
     }
-
     
     public void performLogin() {
         String email = loginForm.getjEmail().getText();
@@ -133,9 +127,44 @@ public class AppController implements ActionListener {
             Logger.getLogger(RegisterForm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public void openListBillForm() {
 
+        ListBill listBillForm = new ListBill();
+        listBillForm.setLocationRelativeTo(null);
 
+        try {
+            Connection con = MyConnection.getConnection();
+            String query = "SELECT bill_type, due_date FROM bill WHERE customer_id = ?";
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1, 1);
 
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                listBillForm.setDisplayBillText(rs.getString("bill_type"));
+                listBillForm.setDisplayDueDateText(rs.getString("due_date"));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        listBillForm.setVisible(true);
+    }
+    
+    public void openProfileForm(String name) {
+        Profile profileForm = new Profile();
+        profileForm.setLocationRelativeTo(null);
+    
+        profileForm.setNameText(name);
+        profileForm.setVisible(true);
+    }
+    
+    public void performLogout(){
+        LoginForm loginForm = new LoginForm();
+        loginForm.setLocationRelativeTo(null);
+        loginForm.setVisible(true);
+    }
     
 }
 
