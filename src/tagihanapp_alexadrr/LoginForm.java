@@ -56,8 +56,8 @@ public class LoginForm extends javax.swing.JFrame {
     }
     
     public javax.swing.JTextField getjEmail() {
-    return jEmail;
-}
+        return jEmail;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

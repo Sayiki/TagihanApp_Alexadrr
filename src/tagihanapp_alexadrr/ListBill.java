@@ -14,6 +14,7 @@ public class ListBill extends javax.swing.JFrame {
     /**
      * Creates new form ListBill
      */
+    AppController appController;
     public ListBill() {
         initComponents();
     }
@@ -25,6 +26,25 @@ public class ListBill extends javax.swing.JFrame {
     public void setDisplayDueDateText(String text) {
         jLabel4.setText("Due date: " + text);
     }
+    
+    public void setDisplayCID(int customerId) {
+        customer_id.setText(String.valueOf(customerId));
+    }
+    
+    public int getCID() {
+        String cidText = customer_id.getText();
+        int customerId = 0;
+    
+        try {
+            customerId = Integer.parseInt(cidText);
+        } catch (NumberFormatException ex) {
+            // Handle the case where the text is not a valid integer
+            ex.printStackTrace();
+        }
+    
+        return customerId;
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -44,6 +64,7 @@ public class ListBill extends javax.swing.JFrame {
         jLabel21 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        customer_id = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -78,6 +99,11 @@ public class ListBill extends javax.swing.JFrame {
         });
 
         jLabel3.setText("Add new bill");
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel3MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -106,13 +132,18 @@ public class ListBill extends javax.swing.JFrame {
                                     .addComponent(jLabel4)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(121, 121, 121)
-                                .addComponent(jLabel1)))))
+                                .addComponent(jLabel1))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(customer_id)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(35, 35, 35)
+                .addGap(10, 10, 10)
+                .addComponent(customer_id)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -121,7 +152,7 @@ public class ListBill extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel4)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 307, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 321, Short.MAX_VALUE)
                 .addComponent(jLabel3)
                 .addGap(75, 75, 75)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -143,6 +174,15 @@ public class ListBill extends javax.swing.JFrame {
         dashb.setLocationRelativeTo(null);
         dashb.setVisible(true);
     }//GEN-LAST:event_jLabel18MouseClicked
+
+    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+        this.dispose();
+        
+        NewBill nb = new NewBill();
+        nb.setLocationRelativeTo(null);
+        nb.setVisible(true);
+        
+    }//GEN-LAST:event_jLabel3MouseClicked
 
     /**
      * @param args the command line arguments
@@ -180,6 +220,7 @@ public class ListBill extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel customer_id;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
