@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package tagihanapp_alexadrr;
+import java.awt.Frame;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -164,6 +165,8 @@ public class AppController implements ActionListener {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+        
+        listBillForm.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         listBillForm.setVisible(true);
     }
@@ -174,20 +177,28 @@ public class AppController implements ActionListener {
         Profile profileForm = new Profile();
         profileForm.setLocationRelativeTo(null);
     
+        profileForm.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         profileForm.setNameText(name);
         profileForm.setVisible(true);
     }
     
-    public void performLogout(){
-        LoginForm loginForm = new LoginForm();
-        loginForm.setLocationRelativeTo(null);
-        loginForm.setVisible(true);
+    public void performLogout() {
+        Frame[] frames = Frame.getFrames();
+        LoginForm lf = new LoginForm();
+        
+        for (Frame frame : frames) {
+            if (frame instanceof JFrame && frame != lf) {
+                ((JFrame) frame).dispose();
+            }
+        }
     }
+
     
-    public void performAddBill(String billType, double amount, Date dueDate, Date paymentDate) {
+    public void performAddBill(String password, String billType, double amount, Date dueDate, Date paymentDate) {
     // Get the customer ID of the logged-in customer
     
-        int customerId = 1;
+        int customerId = getCustomerID(password);
+        
 
         // Check if the customer ID is valid
         if (!isCustomerIdValid(customerId)) {
@@ -228,7 +239,58 @@ public class AppController implements ActionListener {
         } catch (SQLException ex) {
             Logger.getLogger(AppController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        
     }
+    
+    public void performOpenAddBillForm(){
+        NewBill nb = new NewBill();
+        nb.setLocationRelativeTo(null);
+        nb.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        nb.setVisible(true);
+        
+        Dashboard db = new Dashboard();
+        nb.setDisplayCID(loggedInCustomerId);
+        
+        
+        
+        
+    }
+    
+    public void performPayment(){
+        Payment paym = new Payment();
+        paym.setLocationRelativeTo(null);
+        
+        paym.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        
+        paym.setVisible(true);
+    }
+    
+    public int getCustomerID(String password) {
+        String query = "SELECT * FROM `customer` WHERE `Password` = ?";
+        int customerID = 0;
+
+        try {
+            PreparedStatement ps = MyConnection.getConnection().prepareStatement(query);
+            ps.setString(1, password);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                customerID = rs.getInt("id");
+            }
+
+            rs.close();
+            ps.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(AppController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return customerID;
+    }
+
+
+
 
 
 

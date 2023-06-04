@@ -9,10 +9,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 
-/**
- *
- * @author 1BestCsharp
- */
 public class MyConnection {
     
     
