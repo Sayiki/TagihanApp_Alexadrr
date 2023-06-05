@@ -52,16 +52,14 @@
                                   <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="jTextField_Amount" max="32767" attributes="0"/>
                                   <Component id="jComboBox_BillType" max="32767" attributes="0"/>
-                                  <Component id="due_date" pref="111" max="32767" attributes="0"/>
-                                  <Component id="payment_date" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jPasswordField" max="32767" attributes="0"/>
+                                  <Component id="due_date" pref="154" max="32767" attributes="0"/>
+                                  <Component id="jPasswordField" alignment="1" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -69,7 +67,7 @@
                               <Component id="Add_button" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="0" pref="33" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="21" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -100,16 +98,11 @@
                   <Component id="due_date" min="-2" pref="20" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                  <Component id="payment_date" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jPasswordField" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="225" max="32767" attributes="0"/>
+              <EmptySpace pref="265" max="32767" attributes="0"/>
               <Component id="Add_button" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -148,11 +141,6 @@
         <Property name="text" type="java.lang.String" value="Due Date:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel5">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Payment Date:"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JComboBox" name="jComboBox_BillType">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
@@ -170,8 +158,6 @@
     <Component class="javax.swing.JTextField" name="jTextField_Amount">
     </Component>
     <Component class="com.toedter.calendar.JDateChooser" name="due_date">
-    </Component>
-    <Component class="com.toedter.calendar.JDateChooser" name="payment_date">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel19">
       <Properties>

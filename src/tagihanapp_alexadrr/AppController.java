@@ -90,6 +90,13 @@ public class AppController implements ActionListener {
     }
 
     public void performRegister() {
+        
+        RegisterForm rgf = new RegisterForm();
+        rgf.setVisible(true);
+        rgf.pack();
+        rgf.setLocationRelativeTo(null);
+        rgf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
         String email = registerForm.getjEmail().getText();
         String name = registerForm.getjName().getText();
         String phone = registerForm.getjPhone().getText();
@@ -194,7 +201,7 @@ public class AppController implements ActionListener {
     }
 
     
-    public void performAddBill(String password, String billType, double amount, Date dueDate, Date paymentDate) {
+    public void performAddBill(String password, String billType, double amount, Date dueDate) {
     // Get the customer ID of the logged-in customer
     
         int customerId = getCustomerID(password);
@@ -206,8 +213,8 @@ public class AppController implements ActionListener {
             return;
         }
 
-        String query = "INSERT INTO bill (customer_id, bill_type, amount, due_date, paid, payment_date) " +
-                        "VALUES (?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO bill (customer_id, bill_type, amount, due_date, paid) " +
+                        "VALUES (?, ?, ?, ?, ?)";
 
         try {
             PreparedStatement ps = MyConnection.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
@@ -217,7 +224,6 @@ public class AppController implements ActionListener {
             ps.setDouble(3, amount);
             ps.setString(4, new SimpleDateFormat("yyyy-MM-dd").format(dueDate));
             ps.setBoolean(5, false); // Assuming 'paid' is a boolean column and setting it to false initially
-            ps.setString(6, new SimpleDateFormat("yyyy-MM-dd").format(paymentDate));
 
             int rowsAffected = ps.executeUpdate();
 

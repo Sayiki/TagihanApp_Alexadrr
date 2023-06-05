@@ -53,11 +53,9 @@ public class NewBill extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jComboBox_BillType = new javax.swing.JComboBox<>();
         jTextField_Amount = new javax.swing.JTextField();
         due_date = new com.toedter.calendar.JDateChooser();
-        payment_date = new com.toedter.calendar.JDateChooser();
         jLabel19 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
@@ -76,8 +74,6 @@ public class NewBill extends javax.swing.JFrame {
         jLabel3.setText("Total Amount:");
 
         jLabel4.setText("Due Date:");
-
-        jLabel5.setText("Payment Date:");
 
         jComboBox_BillType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "water", "electricity", "internet" }));
 
@@ -142,19 +138,17 @@ public class NewBill extends javax.swing.JFrame {
                                     .addComponent(jLabel2)
                                     .addComponent(jLabel3)
                                     .addComponent(jLabel4)
-                                    .addComponent(jLabel5)
                                     .addComponent(jLabel1))
-                                .addGap(36, 36, 36)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jTextField_Amount)
                                     .addComponent(jComboBox_BillType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(due_date, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
-                                    .addComponent(payment_date, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jPasswordField)))
+                                    .addComponent(due_date, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
+                                    .addComponent(jPasswordField, javax.swing.GroupLayout.Alignment.TRAILING)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(119, 119, 119)
                                 .addComponent(Add_button)))
-                        .addGap(0, 33, Short.MAX_VALUE)))
+                        .addGap(0, 21, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -177,14 +171,10 @@ public class NewBill extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(due_date, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addComponent(payment_date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 225, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 265, Short.MAX_VALUE)
                 .addComponent(Add_button)
                 .addGap(74, 74, 74)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -208,12 +198,11 @@ public class NewBill extends javax.swing.JFrame {
         String billType = jComboBox_BillType.getSelectedItem().toString();
         int amount = Integer.parseInt(jTextField_Amount.getText());
         Date dueDate = due_date.getDate();
-        Date paymentDate = payment_date.getDate();
         char[] passwordChars = jPasswordField.getPassword();
         String password = new String(passwordChars);
 
         // Call the performAddBill method in the AppController
-        appController.performAddBill(password, billType, amount, dueDate, paymentDate);
+        appController.performAddBill(password, billType, amount, dueDate);
 
         this.dispose();
         
@@ -281,9 +270,7 @@ public class NewBill extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPasswordField jPasswordField;
     private javax.swing.JTextField jTextField_Amount;
-    private com.toedter.calendar.JDateChooser payment_date;
     // End of variables declaration//GEN-END:variables
 }

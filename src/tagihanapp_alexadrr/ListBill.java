@@ -31,20 +31,7 @@ public class ListBill extends javax.swing.JFrame {
     public void setDisplayCID(int customerId) {
         customer_id.setText(String.valueOf(customerId));
     }
-    
-    public int getCID() {
-        String cidText = customer_id.getText();
-        int customerId = 0;
-    
-        try {
-            customerId = Integer.parseInt(cidText);
-        } catch (NumberFormatException ex) {
-            // Handle the case where the text is not a valid integer
-            ex.printStackTrace();
-        }
-    
-        return customerId;
-    }
+   
     
 
     /**
@@ -176,10 +163,6 @@ public class ListBill extends javax.swing.JFrame {
 
     private void jLabel18MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel18MouseClicked
         this.dispose();
-
-        Dashboard dashb = new Dashboard();
-        dashb.setLocationRelativeTo(null);
-        dashb.setVisible(true);
     }//GEN-LAST:event_jLabel18MouseClicked
 
     /**

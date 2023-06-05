@@ -30,18 +30,10 @@ public class LoginForm extends javax.swing.JFrame {
     
     public LoginForm() {
         initComponents();
-        // Set the title of the JFrame
         setTitle("Login Form");
-        
-        // Center the JFrame on the screen
         setLocationRelativeTo(null);
-        
-        // Set the default close operation
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
-        // Set the visibility of the JFrame
         setVisible(true);
-        
         appController = new AppController(this, null);
         
         
@@ -188,11 +180,7 @@ public class LoginForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jPasswordField1ActionPerformed
 
     private void jRegisterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRegisterMouseClicked
-        RegisterForm rgf = new RegisterForm();
-        rgf.setVisible(true);
-        rgf.pack();
-        rgf.setLocationRelativeTo(null);
-        rgf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        appController.performRegister();
         this.dispose();
     }//GEN-LAST:event_jRegisterMouseClicked
 
