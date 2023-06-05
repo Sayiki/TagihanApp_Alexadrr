@@ -14,6 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -201,7 +202,7 @@ public class AppController implements ActionListener {
     }
 
     
-    public void performAddBill(String password, String billType, double amount, Date dueDate) {
+    public void performAddBill(String password, String billType, int amount, Date dueDate) {
     // Get the customer ID of the logged-in customer
     
         int customerId = getCustomerID(password);
@@ -221,7 +222,7 @@ public class AppController implements ActionListener {
 
             ps.setInt(1, customerId);
             ps.setString(2, billType);
-            ps.setDouble(3, amount);
+            ps.setInt(3, amount);
             ps.setString(4, new SimpleDateFormat("yyyy-MM-dd").format(dueDate));
             ps.setBoolean(5, false); // Assuming 'paid' is a boolean column and setting it to false initially
 
@@ -263,14 +264,87 @@ public class AppController implements ActionListener {
         
     }
     
-    public void performPayment(){
-        Payment paym = new Payment();
-        paym.setLocationRelativeTo(null);
-        
-        paym.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        
-        paym.setVisible(true);
+    public void performPayment() {
+        Payment paymentForm = new Payment();
+        paymentForm.setLocationRelativeTo(null);
+
+        // Retrieve the bill price and bill ID from the database
+        int billPrice = getBillPriceFromDatabase();
+
+        // Set the bill price in the JPrice label
+        paymentForm.getJPrice().setText(String.valueOf(billPrice));
+        paymentForm.getjLabel12().setText(String.valueOf(billPrice));
+        paymentForm.getjLabel8().setText(String.valueOf(billPrice));
+
+        paymentForm.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        paymentForm.setVisible(true);
     }
+    
+    
+    
+    public int getBillPriceFromDatabase() {
+        int billPrice = 0;
+        int billId = 0;
+        int customerId = getLoggedInCustomerId(); // Assuming you have a method to retrieve the logged-in customer ID
+
+        String query = "SELECT id, amount FROM bill WHERE customer_id = ?"; // Modify the query to retrieve the bill ID
+
+        try {
+            PreparedStatement ps = MyConnection.getConnection().prepareStatement(query);
+            ps.setInt(1, customerId);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                billId = rs.getInt("id"); // Retrieve the bill ID
+                billPrice = rs.getInt("amount");
+            }
+
+            rs.close();
+            ps.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        // Do something with the bill ID if needed
+
+        return billPrice;
+    }
+    
+    public void performPay(int id) {
+        int billId = getBillPriceFromDatabase(); // Assuming you have a method to retrieve the bill ID
+
+        try {
+            // Update the paid column to true
+            String query = "UPDATE bill SET paid = 1 WHERE id = ?";
+            PreparedStatement ps = MyConnection.getConnection().prepareStatement(query);
+
+            // Set the bill ID for the update
+            ps.setInt(1, billId);
+
+            // Execute the update query
+            int rowsUpdated = ps.executeUpdate();
+
+            if (rowsUpdated > 0) {
+                // Payment update successful
+                System.out.println("Payment successful!");
+            } else {
+                // Payment update failed
+                System.out.println("Payment failed!");
+            }
+
+            ps.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+
+
+    
+
+
+
     
     public int getCustomerID(String password) {
         String query = "SELECT * FROM `customer` WHERE `Password` = ?";

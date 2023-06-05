@@ -3,12 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package Classes;
 
 /**
  *
  * @author arzaq
  */
-public class PaymentMethod {
-    
+public class Category {
+    private String name;
+
+    public Category(String name) {
+        this.name = name;
+    }
+
 }

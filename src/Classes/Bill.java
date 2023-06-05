@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package Classes;
 import java.util.Date;
 
 /**
@@ -17,7 +17,6 @@ public class Bill {
     private int amount;
     private Date due_date;
     private boolean paid;
-    private Date payment_date;
 
     public Bill(int id, int customer_id, String bill_type, int amount, Date due_date, boolean paid, Date payment_date) {
         this.id = id;
@@ -26,7 +25,6 @@ public class Bill {
         this.amount = amount;
         this.due_date = due_date;
         this.paid = paid;
-        this.payment_date = payment_date;
     }
     
 
