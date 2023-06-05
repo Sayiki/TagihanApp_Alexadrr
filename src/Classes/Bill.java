@@ -26,9 +26,5 @@ public class Bill {
         this.due_date = due_date;
         this.paid = paid;
     }
-    
-
-
-    
 
 }

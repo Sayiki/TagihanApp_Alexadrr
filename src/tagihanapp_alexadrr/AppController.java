@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package tagihanapp_alexadrr;
+import Classes.Customer;
 import java.awt.Frame;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -14,10 +15,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import java.time.LocalDate;
+
+
 /**
  *
  * @author arzaq
@@ -91,13 +95,12 @@ public class AppController implements ActionListener {
     }
 
     public void performRegister() {
-        
         RegisterForm rgf = new RegisterForm();
         rgf.setVisible(true);
         rgf.pack();
         rgf.setLocationRelativeTo(null);
         rgf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
+
         String email = registerForm.getjEmail().getText();
         String name = registerForm.getjName().getText();
         String phone = registerForm.getjPhone().getText();
@@ -117,40 +120,33 @@ public class AppController implements ActionListener {
 
         if (name.equals("")) {
             JOptionPane.showMessageDialog(null, "Add A name");
+            return; // Return if there is an error
         } else if (password.equals("")) {
             JOptionPane.showMessageDialog(null, "Add A Password");
+            return; // Return if there is an error
         } else if (!password.equals(confirmPassword)) {
             JOptionPane.showMessageDialog(null, "Retype The Password Again");
+            return; // Return if there is an error
         } else if (registerForm.getjDateChooser().getDate() != null) {
             SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
             bdate = dateformat.format(registerForm.getjDateChooser().getDate());
         }
 
-        PreparedStatement ps;
-        String query = "INSERT INTO customer (Name, Email, Gender, DOB, Password, Phone, Alamat) " + "VALUES (?, ?, ?, ?, ?, ?, ?)";
+        Customer customer = new Customer(name, email, gender, LocalDate.parse(bdate), password, phone, address);
 
-        try {
-            ps = MyConnection.getConnection().prepareStatement(query);
-
-            ps.setString(1, name);
-            ps.setString(2, email);
-            ps.setString(3, gender);
-            if (bdate != null) {
-                ps.setString(4, bdate);
-            } else {
-                ps.setNull(4, 0);
-            }
-            ps.setString(5, password);
-            ps.setString(6, phone);
-            ps.setString(7, address);
-
-            if (ps.executeUpdate() > 0) {
-                JOptionPane.showMessageDialog(null, "New User Added");
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(RegisterForm.class.getName()).log(Level.SEVERE, null, ex);
+        // Insert the customer into the database
+        if (customer.insertIntoDatabase()) {
+            JOptionPane.showMessageDialog(null, "New User Added");
+            rgf.dispose(); 
+            LoginForm lgf = new LoginForm(); 
+            lgf.setVisible(true);
+            lgf.pack();
+            lgf.setLocationRelativeTo(null);
+            lgf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         }
     }
+
+
     
     public void openListBillForm() {
         ListBill listBillForm = new ListBill();

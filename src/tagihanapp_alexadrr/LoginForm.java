@@ -180,8 +180,9 @@ public class LoginForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jPasswordField1ActionPerformed
 
     private void jRegisterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRegisterMouseClicked
-        appController.performRegister();
         this.dispose();
+        appController.performRegister();
+        
     }//GEN-LAST:event_jRegisterMouseClicked
 
     private void jLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLoginMouseClicked
