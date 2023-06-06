@@ -35,7 +35,6 @@ public class AppController implements ActionListener {
         this.loginForm = loginForm;
         this.registerForm = registerForm;
 
-        
     }
     
     public int getLoggedInCustomerId() {
@@ -199,7 +198,7 @@ public class AppController implements ActionListener {
 
     
     public void performAddBill(String password, String billType, int amount, Date dueDate) {
-    // Get the customer ID of the logged-in customer
+        // Get the customer ID of the logged-in customer
     
         int customerId = getCustomerID(password);
         
