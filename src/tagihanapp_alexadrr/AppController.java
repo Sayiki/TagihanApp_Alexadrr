@@ -307,7 +307,7 @@ public class AppController implements ActionListener {
     }
     
     public void performPay(int id) {
-        int billId = getBillPriceFromDatabase(); // Assuming you have a method to retrieve the bill ID
+        int billId = 1; // Assuming you have a method to retrieve the bill ID
 
         try {
             // Update the paid column to true
