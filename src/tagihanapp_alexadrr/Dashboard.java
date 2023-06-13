@@ -339,7 +339,7 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void Tagihan_label2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tagihan_label2MouseClicked
 
-        appController.performPayment();
+        appController.openPayment();
         
         
         

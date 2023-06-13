@@ -259,7 +259,7 @@ public class AppController implements ActionListener {
         
     }
     
-    public void performPayment() {
+    public void openPayment() {
         Payment paymentForm = new Payment();
         paymentForm.setLocationRelativeTo(null);
 
